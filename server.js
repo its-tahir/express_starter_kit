@@ -5,12 +5,12 @@ const dotenv = require('dotenv')
 dotenv.config({ path: './config/config.env' })
 
 //lode routes 
-const bootcamps=require('./router/bootcamps')
+const bootcamps = require('./router/bootcamps')
 
 const app = express();
 
 // Mount routes
-app.use('/api/v1/bootcamps',bootcamps)
+app.use('/api/v1/bootcamps', bootcamps)
 
 
 

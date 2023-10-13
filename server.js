@@ -4,38 +4,14 @@ const dotenv = require('dotenv')
 // lode env vars
 dotenv.config({ path: './config/config.env' })
 
+//lode routes 
+const bootcamps=require('./router/bootcamps')
+
 const app = express();
 
+// Mount routes
+app.use('/api/v1/bootcamps',bootcamps)
 
-
-app.get('/', (req, res) => {
-    res.status(200) //optional response status 
-
-    res.json({ success: true, msg: 'Hello World' })
-
-    // or use oneLiner
-    // res.status(200).json({ success: true, id: 1 })
-});
-
-app.get('/api/v1/todos', (req, res) => {
-    res.status(200).json({ success: true, msg: 'Show all todos' })
-});
-
-app.get('/api/v1/todos/:id', (req, res) => {
-    res.status(200).json({ success: true, msg: `Show todo ${req.params.id}` })
-});
-
-app.post('/api/v1/todos', (req, res) => {
-    res.status(200).json({ success: true, msg: `Todo Added` })
-});
-
-app.put('/api/v1/todos/:id', (req, res) => {
-    res.status(200).json({ success: true, msg: `Update todo ${req.params.id}` })
-});
-
-app.delete('/api/v1/todos/:id', (req, res) => {
-    res.status(200).json({ success: true, msg: `Deleted ${req.params.id} todo.` })
-});
 
 
 

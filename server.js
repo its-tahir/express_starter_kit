@@ -10,6 +10,7 @@ connectDb();
 
 // lode middlewares
 const logger = require('./middleware/logger')
+const errorHandler = require('./middleware/error')
 
 //lode routes 
 const bootcamps = require('./router/bootcamps')
@@ -28,7 +29,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/api/v1/bootcamps', bootcamps)
 
 
-
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000
 

@@ -6,8 +6,14 @@ const ErrorResponse = require('../utils/errorResponse')
 //@route        /api/v1/bootcamps
 //@access       public
 exports.getBootcamps = asyncHandler(async (req, res, next) => {
+    // applying filters
+    let query;
+    let queryStr = JSON.stringify(req.query);
+    queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
+    console.log(queryStr)
+    query = Bootcamp.find(JSON.parse(queryStr))
 
-    const bootcamps = await Bootcamp.find();
+    const bootcamps = await query
     res.status(200).json({ success: true, count: bootcamps.length, data: bootcamps })
 
 })

@@ -14,6 +14,7 @@ const errorHandler = require('./middleware/error')
 
 //lode routes 
 const bootcamps = require('./router/bootcamps')
+const courses = require('./router/courses');
 
 const app = express();
 
@@ -27,6 +28,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // Mount routes
 app.use('/api/v1/bootcamps', bootcamps)
+app.use('/api/v1/courses', courses);
 
 
 app.use(errorHandler);

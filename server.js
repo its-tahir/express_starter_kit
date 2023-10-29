@@ -1,6 +1,8 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const connectDb = require('./config/db')
+const cookieParser = require('cookie-parser');
+
 
 // lode env vars
 dotenv.config({ path: './config/config.env' })
@@ -15,11 +17,16 @@ const errorHandler = require('./middleware/error')
 //lode routes 
 const bootcamps = require('./router/bootcamps')
 const courses = require('./router/courses');
+const auth = require('./router/auth');
+const users = require('./router/users');
 
 const app = express();
 
 // body parser
 app.use(express.json())
+
+// Cookie parser
+app.use(cookieParser());
 
 // Mount middleware
 if (process.env.NODE_ENV === 'development') {
@@ -29,7 +36,8 @@ if (process.env.NODE_ENV === 'development') {
 // Mount routes
 app.use('/api/v1/bootcamps', bootcamps)
 app.use('/api/v1/courses', courses);
-
+app.use('/api/v1/auth', auth);
+app.use('/api/v1/users', users);
 
 app.use(errorHandler);
 

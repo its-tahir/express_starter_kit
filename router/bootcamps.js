@@ -3,15 +3,17 @@ const { getBootcamps, getSingleBootcamp, addBootcamp, updateBootcamps, deleteBoo
 
 // includes other resource
 const courseRouter = require('./courses')
+const Bootcamp = require('../models/Bootcamps');
 
 const router = express.Router()
 
+const advancedResults = require('../middleware/advancedResults');
 const { protect, authorize } = require('../middleware/auth');
 
 // reroute into other resource router
 router.use('/:bootcampId/courses', courseRouter)
 
-router.route('/').get(getBootcamps).post(protect, addBootcamp)
+router.route('/').get(advancedResults(Bootcamp, 'courses'), getBootcamps).post(protect, addBootcamp)
 
 router
     .route('/:id')
